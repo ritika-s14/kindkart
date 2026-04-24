@@ -52,8 +52,8 @@ To build a centralized platform that simplifies the donation process and ensures
 
 ### Donation Interface
 <p>
-  <img src="assets/donation.png" width="45%">
-  <img src="assets/donation_completed.png" width="45%">
+  <img src="assets/Donation.png" width="45%">
+  <img src="assets/Donation_Completed.png" width="45%">
 </p>
 
 ---
