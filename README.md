@@ -45,7 +45,7 @@ To build a centralized platform that simplifies the donation process and ensures
 <img src="assets/Register.png" width="700">
 
 ### Registered Orphanages
-<img src="assets/Registered_Orphanages.png" width="700">
+<img src="assets/Registered_Orphangaes.png" width="700">
 
 ### Orphanage Details
 <img src="assets/Orphanage.png" width="700">
