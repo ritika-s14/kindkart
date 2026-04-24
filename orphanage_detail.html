@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orphanage Details - KindKart</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">KindKart</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="index.html#services">SERVICES</a></li>
+        <li><a href="orphanages.html">ORPHANAGES</a></li>
+        <li><a href="login.html">LOGIN</a></li>
+        <li><a href="signup.html">SIGN UP</a></li>
+        <li><a href="register.html">REGISTER</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="orphanage-detail-section">
+    <div class="container" id="detail-container">
+      <p>Loading orphanage details...</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 KindKart. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const orphanageId = urlParams.get("id");
+
+    if (!orphanageId) {
+      document.getElementById("detail-container").innerHTML = "<p>Orphanage ID missing.</p>";
+    } else {
+      fetch(`backend/get_orphanage_details.php?id=${orphanageId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            const o = data.data;
+            document.getElementById("detail-container").innerHTML = `
+              <div class="orphanage-card">
+                <h2>${o.name}</h2>
+                <p><strong>Location:</strong> ${o.location}</p>
+                <p><strong>Children:</strong> ${o.children_count} | <strong>Adults:</strong> ${o.adults_count}</p>
+                <p><strong>Needs:</strong> ${o.needs.length > 0 ? o.needs.join(", ") : "No specific needs listed."}</p>
+                <p><strong>About:</strong> ${o.about}</p>
+                <p><strong>Mission:</strong> ${o.mission}</p>
+                <p><strong>Contact:</strong> ${o.contact_phone} | ${o.contact_email}</p>
+                <button class="donate-btn" id="donate-btn">Donate Now</button>
+              </div>
+            `;
+
+            document.getElementById("donate-btn").addEventListener("click", () => {
+              Swal.fire({
+                title: "Make a Donation 💖",
+                html: `
+                  <input type="text" id="donorName" class="swal2-input" placeholder="Your Name">
+                  <input type="number" id="donationAmount" class="swal2-input" placeholder="Enter amount (₹)">
+                `,
+                confirmButtonText: "Donate",
+                focusConfirm: false,
+                preConfirm: () => {
+                  const donorName = document.getElementById("donorName").value.trim();
+                  const donationAmount = document.getElementById("donationAmount").value.trim();
+                  if (!donorName || !donationAmount || donationAmount <= 0) {
+                    Swal.showValidationMessage("Please enter your name and a valid donation amount.");
+                    return false;
+                  }
+                  return { donorName, donationAmount };
+                }
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.fire({
+                    icon: "success",
+                    title: `Thank you, ${result.value.donorName}!`,
+                    text: `Your donation of ₹${result.value.donationAmount} has been recorded.`,
+                    confirmButtonText: "OK"
+                  });
+                }
+              });
+            });
+          } else {
+            document.getElementById("detail-container").innerHTML = `<p>${data.message}</p>`;
+          }
+        })
+        .catch(() => {
+          document.getElementById("detail-container").innerHTML = "<p>Error loading details.</p>";
+        });
+    }
+  </script>
+</body>
+</html>

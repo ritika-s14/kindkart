@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register Orphanage - KindKart</title>
+  <link rel="stylesheet" href="style.css"/> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"/>
+</head>
+<body>
+    <nav class="navbar modern-nav">
+        <div class="container">
+          <a href="index.html" class="logo">KindKart</a>
+          <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="index.html#services">SERVICES</a></li>
+            <li><a href="orphanages.html">ORPHANAGES</a></li>
+            <li><a href="login.html">LOGIN</a></li>
+            <li><a href="signup.html">SIGN UP</a></li>
+            <li><a href="register.html" class="active">REGISTER</a></li>
+          </ul>
+        </div>
+    </nav>
+        
+
+  <section class="auth-container">
+    <h2>Register Your Orphanage</h2>
+
+    <form class="auth-form" action="backend/register_orphanage.php" method="POST">
+        <p style="text-align: center; margin-bottom: 20px;">*You must be logged in to register an orphanage. Registering here will mark your account as an owner.</p>
+        
+        <div class="form-group">
+          <label for="name">Orphanage Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="owner_name">Owner/Manager Full Name</label>
+          <input type="text" id="owner_name" name="owner_name" required />
+        </div>
+        <div class="form-group">
+            <label for="location">Full Address (Location)</label>
+            <textarea id="location" name="location" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group-flex" style="display: flex; gap: 20px;">
+            <div class="form-group" style="flex: 1;">
+                <label for="children_count">No. of Kids</label>
+                <input type="number" id="children_count" name="children_count" min="0" value="0" required />
+            </div>
+            <div class="form-group" style="flex: 1;">
+                <label for="adults_count">No. of Adults (Staff/Caretakers)</label>
+                <input type="number" id="adults_count" name="adults_count" min="0" value="0" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="contact_phone">Contact Phone</label>
+            <input type="text" id="contact_phone" name="contact_phone" required />
+        </div>
+        <div class="form-group">
+            <label for="contact_email">Contact Email</label>
+            <input type="email" id="contact_email" name="contact_email" required />
+        </div>
+        <div class="form-group">
+            <label for="needs">Current Needs (Comma-separated, e.g., Food, School Books, Medicine)</label>
+            <input type="text" id="needs" name="needs" placeholder="E.g. School Books, Winter Blankets, Tutors" required />
+        </div>
+        <div class="form-group">
+            <label for="about">About the Orphanage (Short Description)</label>
+            <textarea id="about" name="about" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="mission">Mission Statement</label>
+            <textarea id="mission" name="mission" rows="2"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Register Orphanage</button>
+    </form>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2023 KindKart. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="script.js"></script>
+</body>
+</html>

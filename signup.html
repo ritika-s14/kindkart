@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up - KindKart</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"/>
+</head>
+<body>
+  <nav class="navbar modern-nav">
+    <div class="container">
+      <a href="index.html" class="logo">KindKart</a>
+      <ul class="nav-links">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="index.html#services">SERVICES</a></li>
+        <li><a href="orphanages.html">ORPHANAGES</a></li>
+        <li><a href="login.html">LOGIN</a></li>
+        <li><a href="signup.html" class="active">SIGN UP</a></li>
+        <li><a href="register.html">REGISTER</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="modern-form-section">
+    <div class="login-card">
+      <h2>Create Account</h2>
+      <p>Join KindKart as a Donor or Volunteer</p>
+
+      <form class="auth-form" action="backend/signup.php" method="POST" novalidate>
+        <div class="form-group">
+          <input type="text" id="name" name="full_name" required placeholder="Full Name" />
+        </div>
+
+        <div class="form-group">
+          <input type="email" id="email" name="email" required placeholder="Email Address" />
+        </div>
+
+        <div class="form-group">
+          <input type="password" id="password" name="password" required placeholder="Password" />
+        </div>
+
+        <button type="submit" class="btn-primary">Sign Up</button>
+        <p class="form-footer">Already have an account? <a href="login.html">Login</a></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer modern-footer">
+    <div class="container">
+      <p>&copy; 2023 KindKart. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="script.js"></script>
+</body>
+</html>

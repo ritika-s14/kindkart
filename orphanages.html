@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orphanages - KindKart</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">KindKart</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="index.html#services">SERVICES</a></li>
+        <li><a href="orphanages.html" class="active">ORPHANAGES</a></li>
+        <li><a href="login.html">LOGIN</a></li>
+        <li><a href="signup.html">SIGN UP</a></li>
+        <li><a href="register.html">REGISTER</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="orphanage-listing-section">
+    <div class="container">
+      <h2>Registered Orphanages</h2>
+      <div class="orphanage-grid" id="orphanage-grid">
+        <p>Loading orphanages...</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 KindKart. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById("orphanage-grid");
+    fetch("backend/get_orphanages.php")
+      .then(res => res.json())
+      .then(resp => {
+        if (!resp.success || resp.data.length === 0) {
+          grid.innerHTML = "<p>No orphanages found.</p>";
+          return;
+        }
+
+        grid.innerHTML = resp.data.map(o => `
+          <div class="orphanage-card">
+            <h3>${o.name}</h3>
+            <p><strong>Location:</strong> ${o.location}</p>
+            <p><strong>Children:</strong> ${o.children_count}</p>
+            <p><strong>Adults:</strong> ${o.adults_count}</p>
+            <p><strong>Need:</strong> ${o.needs_gist}</p>
+            <button class="view-btn" onclick="viewDetails(${o.id})">View Details</button>
+          </div>
+        `).join("");
+      })
+      .catch(() => {
+        grid.innerHTML = "<p>Failed to load orphanages. Please try again later.</p>";
+      });
+  });
+
+  function viewDetails(id) {
+    window.location.href = `orphanage_detail.html?id=${id}`;
+  }
+  </script>
+</body>
+</html>
