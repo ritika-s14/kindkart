@@ -32,11 +32,14 @@ To build a centralized platform that simplifies the donation process and ensures
 
 ##  Screenshots
 
+### Home Page
+<img src="assets/Home.png" width="700">
+
 ### Orphanage Details
-<img src="assets/orphanage.png" width="700">
+<img src="assets/Orphanage.png" width="700">
 
 ### Registered Orphanages
-<img src="assets/registered_orphanages.png" width="700">
+<img src="assets/Registered_Orphanages.png" width="700">
 
 ### Donation Interface
 <p>
